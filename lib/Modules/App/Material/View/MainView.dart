@@ -1,19 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:platform_convertar/App/Modules/Material/HomeView/Provider/BottomNavigationProvider/NavigatinProvider.dart';
-import 'package:platform_convertar/App/Modules/Material/HomeView/Provider/PlatformProvider/HomeProivder.dart';
-import 'package:platform_convertar/Compnents/MaterialViews/chatView/chat.dart';
-import 'package:platform_convertar/Compnents/MaterialViews/homeView/home.dart';
-import 'package:platform_convertar/Compnents/MaterialViews/settingView/settings.dart';
 import 'package:provider/provider.dart';
 
 import '../../../UTILS/theme/Proivder/ThemeProvider.dart';
+import '../../Compnents/MaterialViews/chatView/chat.dart';
+import '../../Compnents/MaterialViews/homeView/home.dart';
+import '../../Compnents/MaterialViews/settingView/settings.dart';
 
 class ScaffoldHomeView extends StatelessWidget {
-  const ScaffoldHomeView({super.key});
+  ScaffoldHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List pageList = [
+      Home(),
+      SettingsView(),
+      Chat(),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -28,13 +32,6 @@ class ScaffoldHomeView extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: Provider.of<NavigationProvider>(context, listen: true)
-            .navigationModel
-            .selectedIndex,
-        onTap: (value) {
-          Provider.of<NavigationProvider>(context, listen: false)
-              .changePlatform(value: value);
-        },
         items: const [
           BottomNavigationBarItem(
               icon: Icon(
